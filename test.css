@@ -1,0 +1,12 @@
+body {
+	background: grey;
+}
+
+.row ,.circle {
+	padding: 20px 20px;
+}
+
+p {
+	color: #333;
+	font-size: 18px;
+}
