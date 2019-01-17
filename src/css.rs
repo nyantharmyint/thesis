@@ -3,7 +3,7 @@ use parser::*;
 
 #[derive(Debug)]
 pub struct StyleSheet {
- rules: Vec<Rule>,
+ pub rules: Vec<Rule>,
 }
 
 #[derive(Debug)]
@@ -20,18 +20,38 @@ pub enum Selector {
 
 #[derive(Debug)]
 pub struct Decleration {
-	property: String,
-	value: Vec<String>,
+	pub property: String,
+	pub value: Vec<String>,
 }
 
 impl Decleration {
-	fn new(property: String, value: Vec<String>) -> Decleration {
+	pub fn new(property: String, value: Vec<String>) -> Decleration {
 		Decleration {
 			property,
 			value,
 		}
 	}
+
+
 }
+
+pub	fn clone_dec(dec : &Vec<Decleration>) -> Vec<Decleration> {
+
+		let mut result = Vec::new();
+		for d in dec.iter() {
+			let property = d.property.clone();
+			let mut value = Vec::new();
+			for s in d.value.iter(){
+				value.push(s.clone());
+			}
+			result.push(Decleration{ property, value})
+		}
+
+
+		result
+	}
+
+
 impl Rule {
 	fn new(selectors: Vec<Selector>, declerations: Vec<Decleration>) -> Rule {
 		Rule {
@@ -39,7 +59,18 @@ impl Rule {
 			declerations,
 		}
 	}
+
 }
+
+
+pub fn take_selector(G : Selector) -> String {
+	match G {
+		Selector::Tag_Name(name) => name,
+		Selector::Class(name) => name,
+		Selector::Id(name) => name,	
+	}
+}	
+
 
 impl StyleSheet {
 	pub fn new() -> StyleSheet {
