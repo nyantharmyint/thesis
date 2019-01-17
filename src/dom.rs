@@ -1,9 +1,11 @@
 use std::collections::HashMap;
-
+use css::Decleration;
 #[derive(Debug)]
 pub struct Node {
 	pub node_type: Node_Type,
+	pub style: Vec<Decleration>,
 	pub children: Vec<Node>,
+
 }
 
 #[derive(Debug)]
@@ -26,6 +28,7 @@ impl Node {
 		Node {
 			node_type : Node_Type::Text(text),
 			children : children,
+			style : Vec::new()
 		}
 		
 	}
@@ -41,12 +44,22 @@ impl Node {
 				}
 			),
 		children : Vec::new(),
+		style : Vec::new()
 	}
 }
 	pub fn push_child(&mut self, child: Node) {
 		self.children.push(child);
 		
 	}
+
+	pub fn add_style(&mut self, style: Vec<Decleration> )  {
+		for s in style {
+			self.style.push(s);
+		}
+
+	}
+
+
 
 }
 

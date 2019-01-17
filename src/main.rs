@@ -19,11 +19,11 @@ fn main() {
 
 	let (html_nodes, internal_css) = to_parse.parse_html();
 	let dom = dom::dom(html_nodes);
-	println!("The Dom : \n {:#?}",dom );
 	let mut to_parse_css = parser::Parser::new(css_file);
 	let external_css = to_parse_css.parse_css();
 	let merged_css = css::merge_css(external_css, internal_css);
-	println!("{:#?}", merged_css );
+
+	style::style(dom, merged_css);
 
 }
 
